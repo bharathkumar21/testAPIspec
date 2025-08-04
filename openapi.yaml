@@ -1,0 +1,102 @@
+
+openapi: 3.0.3
+info:
+  title: accAccessControlAIDRequest API
+  version: 1.0.0
+paths:
+  /accAccessControlAIDRequest:
+    post:
+      summary: Access Control AID Request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/accAccessControlAIDRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+components:
+  schemas:
+    accAccessControlAIDRequest:
+      type: object
+      required:
+        - msgAuthDetails
+        - accAccessControlAIDInfo
+      properties:
+        msgAuthDetails:
+          $ref: '#/components/schemas/msgAuthDetails'
+        accAccessControlAIDInfo:
+          $ref: '#/components/schemas/accAccessControlAIDInfo'
+    msgAuthDetails:
+      type: object
+      required:
+        - clientNo
+        - authKey
+        - requestDateTime
+        - signatureValue
+        - signatureVersion
+        - ariaAccountID
+        - ariaAccountNo
+        - userID
+      properties:
+        clientNo:
+          type: integer
+        authKey:
+          type: string
+        requestDateTime:
+          type: string
+        signatureValue:
+          type: string
+        signatureVersion:
+          type: string
+        ariaAccountID:
+          type: string
+        ariaAccountNo:
+          type: integer
+        userID:
+          type: string
+    accAccessControlAIDInfo:
+      type: object
+      required:
+        - ariaAccountID
+        - ariaAccountNo
+        - numberOfAllotments
+        - accAccessControlAIDFeatureList
+      properties:
+        ariaAccountID:
+          type: string
+        ariaAccountNo:
+          type: integer
+        numberOfAllotments:
+          type: integer
+        accAccessControlAIDFeatureList:
+          type: array
+          items:
+            $ref: '#/components/schemas/accAccessControlAIDFeatureList'
+    accAccessControlAIDFeatureList:
+      type: object
+      required:
+        - titleDomain
+        - accessFeature
+        - eligibleForSharing
+      properties:
+        titleCode:
+          type: string
+        accessTitleCode:
+          type: string
+        titleDomain:
+          type: string
+        accessFeature:
+          type: string
+        eligibleForSharing:
+          type: boolean
